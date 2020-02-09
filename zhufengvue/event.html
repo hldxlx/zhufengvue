@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--所有绑定的方法都是window上的-->
+    <div onclick="fn()" id="btn">点我啊</div>
+<script>
+//    (function(){
+//        function fn() {//此时弹不出来
+//            alert('1')
+//        }
+//    })()
+    function fn() {
+        alert('1')
+    }
+    console.log(btn.onclick);
+</script>
+</body>
+</html>

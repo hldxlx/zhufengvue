@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--取值表达式 小胡子语法 moustache; 可以放赋值 取值 三元-->
+    {{msg}}
+</div>
+<!--
+    1.使用vue 有两种方式  直接引用 工程化
+    2.你使用vue会给你一个Vue(类)
+-->
+<script src="./node_modules/_vue@2.6.11@vue/dist/vue.js"></script>
+<script>
+    // 需要一块json 需要一个位置承载这些数据
+    let vm = new Vue({ //不兼容ie8以下 包括ie8  根实例
+        el:'#app', // 是一个选择器 querySelector ，不能选择body 或者 html
+        data:{ //所有数据都要先声明一下，这个data最终会被这个实例代理
+            msg:'hello world zfpx',//可通过vm.msg去到对应的内容
+            school:{name:'zfpx',age:8}
+        }
+    });//Object.definedProperty
+</script>
+</body>
+</html>

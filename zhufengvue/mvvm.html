@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--修饰符-->
+   <input type="text" @keyup.enter="add" v-model="val">
+    <ul>
+        <li v-for="(a,index) in arr">{{a}}<button @click="remove(index)">删除</button></li>
+    </ul>
+</div>
+
+<script src="./node_modules/_vue@2.6.11@vue/dist/vue.js"></script>
+<script>
+
+    let vm = new Vue({
+        el:'#app',
+        methods:{
+            add(e){
+                    this.arr.unshift(this.val);
+                    this.val = '';
+            },
+            remove(index){
+                this.arr = this.arr.filter((item,i) => index !== i)
+            }
+        },
+        data:{
+           val:'',
+            arr:[]
+        }
+    });
+</script>
+</body>
+</html>

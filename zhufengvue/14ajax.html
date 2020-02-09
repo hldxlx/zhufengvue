@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div id="app">
+    <div class="container">
+        <div class="row">
+            <caption class="h2 text-danger text-center">购物列表</caption>
+            <table class="table table-bordered">
+        <tr>
+            <!--click点击时 checkbox的状态还没有改变 所以拿到的总是相反的-->
+            <!--change可以保证只当值变化后再触发函数-->
+            <th class="text-center">全选 <input type="checkbox" v-model="checkAll" @change="change"></th>
+            <th class="text-center">商品</th>
+            <th class="text-center">单价</th>
+            <th class="text-center">数量</th>
+            <th class="text-center">小计</th>
+            <th class="text-center">操作</th>
+        </tr>
+        <tr v-for="(product,index) in products">
+            <td><input type="checkbox" v-model="product.isSelected"></td>
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            <!--.number 是让输入框的值变成数字类型-->
+            <td><input type="number" v-model.number="product.count"></td>
+            <!--过滤器 原数据不变的情况下 改变显示的效果 管道符-->
+            <td>{{product.price*product.count | toFixed(2)}}</td>
+            <td><button @click="remove(product)">删除</button></td>
+        </tr>
+        <tr>
+
+        </tr>
+    </table>
+        </div>
+    </div>
+</div>
+
+<script src="./node_modules/_vue@2.6.11@vue/dist/vue.js"></script>
+<script src="./13promise-ajax.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        filters:{
+            toFixed(input,param1){//这里的this指向的是window
+                return '￥'+input.toFixed(param1)//input 代表的是管道符前面的内容 param1代表的是toFixed中传递的参数
+            }
+        },
+        created(){
+           this.initData();
+        },
+        methods:{
+            change(){
+                //根据当前自己的状态设置其他人的状态 实现全选和反选
+                this.products.forEach(item =>item.isSelected = this.checkAll)
+            },
+            remove(p){
+                this.products = this.products.filter(item =>item !== p)
+            },
+            initData(){
+                ajax({url:'./carts.json'}).then((res)=>{
+                    console.log(res,'==res');
+                    this.products = res;
+                })
+            }
+        },
+        data:{
+            products:[],
+            checkAll:false
+        }
+    });
+</script>
+</body>
+</html>

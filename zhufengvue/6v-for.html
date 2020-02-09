@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--以前 拼字符串innerHTML-->
+    <!--vue提供了一个指令 v-for 解决循环问题 更高效 会复用原有的结构-->
+    <div id="app">
+        <ul>
+            <li v-for="(phone,index) in iphones"><!--要循环谁 就将v-for写在谁的身上--> <!--phone是自己声明的一个变量-->
+                {{index+1}}
+                {{phone.name}}
+                <ul>
+                    <li v-for="(c,childIndex) in phone.type">{{index+1}}.{{childIndex+1}}{{c}}</li>
+                </ul>
+            </li>
+        </ul>
+
+        <div v-for="c1 in 'aaaa'">{{c1}}</div>
+        <div v-for="c2 in 10">{{c2}}</div>
+        <div v-for="(value,key,index) in obj">{{value}}{{key}}{{index}}</div>
+    </div>
+
+    <script src="./node_modules/_vue@2.6.11@vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            fruits:['芒果','荔枝','榴莲'],
+            iphones:[
+                {name:'iphone 8 ',type:['黑色','白色']},
+                {name:'iphone 7 plus ',type:['红色']},
+                {name:'iphone x ',type:['黑色']}
+
+            ],
+            obj:{name:'myName',age:18}
+        }
+    })
+</script>
+</body>
+</html>

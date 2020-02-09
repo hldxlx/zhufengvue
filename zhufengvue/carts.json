@@ -1,0 +1,14 @@
+[
+  {
+    "isSelected": true,
+    "name": "手机",
+    "price": "2000.356",
+    "count": 3
+  },
+  {
+    "isSelected": false,
+    "name": "充电器",
+    "price": "300.254",
+    "count": 3
+  }
+]
