@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="a">
+    <!--根据输入框中的内容 算出一个错误信息-->
+    {{msg}}
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:"#app",
+        computed:{//computed 默认调用get方法,必须要有return,computed不支持异步
+            msg(){
+                if(this.a.length<3){
+                    return '少了'
+                }
+                if(this.a.length>6){
+                    return '多了'
+                }
+                return ''
+
+//                setTimeut(()=>{//没效 因为computed不支持异步
+//                    if(this.a.length<3){
+//                        return '少了'
+//                    }
+//                    if(this.a.length>6){
+//                        return '多了'
+//                    }
+//                    return ''
+//                },500)
+            }
+        },
+        data:{
+            a:''
+        }
+    })
+</script>
+<!--当给a赋值的时候影响了 错误信息的改变（这种想法是错误的） -->
+</body>
+</html>
