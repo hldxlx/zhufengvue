@@ -14,7 +14,28 @@ const vm = new Vue({
             {isSelected:false,title:'吃饭'}
         ],
         title:'',
-        cur:''
+        cur:'',
+        hash:''
+    },
+    created(){
+        //ajax获取 初始化数据
+        // 如果localStorage有数据就用有的 没数据就用默认的
+        this.todos = JSON.parse(localStorage.getItem('data')) || this.todos;
+
+        this.hash = window.location.hash.slice(2) || 'all';
+        window.addEventListener('hashchange',()=>{
+            this.hash = window.location.hash.slice(2);
+        },false)
+
+
+    },
+    watch:{
+        todos:{//watch默认只监控一层数据的变化，
+            handler(){//默认写成函数 就相当于默认写了个handler
+                //localStorage 默认存的是字符串
+                localStorage.setItem('data',JSON.stringify(this.todos));
+            },deep:true
+        }
     },
     methods:{
         add(){
@@ -38,6 +59,12 @@ const vm = new Vue({
     computed:{
         count(){
             return this.todos.filter(item =>!item.isSelected).length;
+        },
+        filterTodos(){
+            if(this.hash === 'all') return this.todos;
+            if(this.hash === 'finish') return this.todos.filter(item => item.isSelected);
+            if(this.hash === 'unfinish') return this.todos.filter(item => !item.isSelected);
+            return this.todos;
         }
     }
 })

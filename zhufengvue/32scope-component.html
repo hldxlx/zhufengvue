@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <com1></com1>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //局部组件 使用的三部曲 1 创建这个组件 2 注册这个组件 3使用这个组件
+    //组件是相互独立的 不能直接跨作用域 实例也是一个组件，组件中拥有生命周期函数
+
+    //如果组件公用了数据 会导致同时更新
+    //子组件不能直接使用父组件的数据（组件之间的数据交互）
+    //组件理论上可以无线嵌套
+
+    let com1 = {
+        template:`<div>组件1</div>`
+    }
+    let vm = new Vue({
+        el:"#app",
+        data:{
+
+        },
+        components:{
+            com1
+        }
+    })
+</script>
+</body>
+</html>

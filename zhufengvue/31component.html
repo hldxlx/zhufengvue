@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--分类 页面级组件：
+    1个页面是一个组件
+    2 将可复用的部分抽离出来 基础组件
+    一个自定义标签 vue就会把他看成一个组件  div p span a header section ... vue可以给这些标签赋予一定意义
+-->
+<div id="app">
+    <my-handsome></my-handsome>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+//    组件名不要带有大写 多个单词用 -
+//    只要组件名和定义名字相同是可以的（首字母可以大写）
+    Vue.component('my-handsome',{//一个对象可以看成一个组件
+        template:'<div>{{msg}}</div>',
+        data(){
+            return {
+                msg:'帅气'
+            }
+        }
+    });
+    let vm = new Vue({
+        el:"#app",
+        data:{
+
+        },
+    })
+</script>
+</body>
+</html>
